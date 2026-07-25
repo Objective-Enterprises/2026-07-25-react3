@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 import { fetchRecentThreads } from "../../services/threadService";
 import ThreadList from "../../components/ThreadList/ThreadList";
-import { Container, Card } from "react-bootstrap";
+import CreateThreadForm from "../../components/Forms/CreateThreadForm";
+import { Container, Card, Button } from "react-bootstrap";
 import "./Home.css";
 
 export default function Home() {
   const [threads, setThreads] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
     const loadThreads = async () => {
@@ -41,12 +43,27 @@ export default function Home() {
       <Container fluid className="home-content">
         <Card className="border-0 rounded-3 shadow-sm mb-3">
           <Card.Body className="p-3 p-md-4">
-            <h1
-              className="fs-4 fs-md-3 fw-bold mb-3"
-              style={{ color: "var(--text-dark)" }}
-            >
-              🏠 Home Feed
-            </h1>
+            <div className="d-flex justify-content-between align-items-center mb-4">
+              <h1
+                className="fs-4 fs-md-3 fw-bold mb-0"
+                style={{ color: "var(--text-dark)" }}
+              >
+                🏠 Home Feed
+              </h1>
+              <Button
+                variant={showForm ? "outline-danger" : "primary"}
+                onClick={() => setShowForm(!showForm)}
+                className="rounded-pill px-4"
+              >
+                {showForm ? "✕ Close" : "➕ Create"}
+              </Button>
+            </div>
+
+            {showForm && (
+              <div className="mb-4">
+                <CreateThreadForm onClose={() => setShowForm(false)} />
+              </div>
+            )}
 
             {loading ? (
               <Card.Text className="text-muted text-center py-4">
