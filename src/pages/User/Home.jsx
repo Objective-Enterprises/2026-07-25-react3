@@ -53,9 +53,17 @@ export default function Home() {
               <Button
                 variant={showForm ? "outline-danger" : "primary"}
                 onClick={() => setShowForm(!showForm)}
-                className="rounded-pill px-4"
+                className="rounded-pill px-4 d-flex align-items-center"
               >
-                {showForm ? "✕ Close" : "➕ Create"}
+                {showForm ? (
+                  <>
+                    <i className="bi bi-x-lg me-2"></i> Close
+                  </>
+                ) : (
+                  <>
+                    <i className="bi bi-plus-lg me-2"></i> Create
+                  </>
+                )}
               </Button>
             </div>
 
