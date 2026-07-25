@@ -5,6 +5,7 @@ import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
 import Home from "./pages/User/Home";
 import ThreadPage from "./pages/User/ThreadPage";
+import Profile from "./pages/User/Profile";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import { AuthProvider } from "./context/AuthContext";
 import "./App.css";
@@ -35,6 +36,15 @@ function App() {
                   element={
                     <PrivateRoute>
                       <ThreadPage />
+                    </PrivateRoute>
+                  }
+                />
+
+                <Route
+                  path="/profile"
+                  element={
+                    <PrivateRoute>
+                      <Profile />
                     </PrivateRoute>
                   }
                 />
